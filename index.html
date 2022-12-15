@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS GAME APP</title>
+  </head>
+  <body>
+    <div id="end-game">
+      <div class="bg"></div>
+      <div class="text">
+        <h1></h1>
+        <button onclick="restartGame()">RESTART</button>
+      </div>
+    </div>
+    
+    <div id="fight-wrapper">
+      <div class="bg"></div>
+      <div class="text">
+        <h1>You started a fight agains: <span id="monster-name">monster name</span></h1>
+      </div>
+    </div>
+
+    <div id="take-item-wrapper">
+      <div class="bg"></div>
+      <div class="text">
+        <h1> You take an item: <span id="item-taken-value"></span> </h1>
+      </div>
+    </div>
+
+    <div class="game-wrapper wrapper" id="game-wrapper"></div>
+
+    <div class="log-wrapper wrapper">
+      <h1 id="game-name">Dungeon & Dragons</h1>
+      <div class="player-stats">
+        <div class="stat">
+          <h3 class="stat-title">Health</h3>
+          <div id="hp"></div>
+        </div>
+        <div class="stat">
+          <h3 class="stat-title">Attack Damage</h3>
+          <div id="attack-damage"></div>
+        </div>
+        <div class="stat">
+          <h3 class="stat-title">Armor</h3>
+          <div id="armor"></div>
+        </div>
+        <div class="stat">
+          <h3 class="stat-title">Monster Killed</h3>
+          <div id="monster-killed"></div>
+        </div>
+      </div>
+
+      <div class="log-box">
+        <h2>Game Log</h2>
+        <div class="log-text-wrapper" id="log-text-wrapper"></div>
+      </div>
+    </div>
+
+    <script>
+      const gameWrapper = document.getElementById("game-wrapper");
+      const logWrapper = document.getElementById("log-text-wrapper");
+      const hpElement = document.getElementById("hp");
+      const armorElement = document.getElementById("armor");
+      const adElement = document.getElementById("attack-damage");
+      const fightWrapper = document.getElementById("fight-wrapper");
+      const monsterName = document.getElementById("monster-name");
+      const monsterKilled = document.getElementById("monster-killed");
+      const takeItemWrapper = document.getElementById("take-item-wrapper");
+      const itemTaken = document.getElementById("item-taken-value");
+
+      function removeLast() {
+        const haveLastElement = document.getElementById("last");
+        console.log(haveLastElement);
+        if (haveLastElement != null) haveLastElement.removeAttribute("id");
+      }
+    </script>
+    <script src="Item.js"></script>
+    <script src="Monster.js"></script>
+    <script src="Board.js"></script>
+    <script src="Location.js"></script>
+    <script src="Player.js"></script>
+    <script src="App.js"></script>
+    <script>
+      function removeBoard(father) {
+        let child = father.lastElementChild;
+        while (child) {
+            father.removeChild(child);
+          child = father.lastElementChild;
+        }
+      }
+
+      function restartGame() {
+        removeBoard(gameWrapper);
+        removeBoard(logWrapper);
+        player = new Player();
+        board = new Board();
+        board.generateBoard(player);
+        board.printBoard();
+        hpElement.innerText = player.getHp();
+        armorElement.innerText = player.getArmor();
+        adElement.innerText = player.getAttackDamage();
+        monsterKilled.innerText = player.monsterKilled
+        gameOn = true;
+        document.getElementById("end-game").classList.remove("active");
+      }
+    </script>
+  </body>
+</html>

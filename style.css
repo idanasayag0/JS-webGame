@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    overflow: hidden;
+}
+
+#end-game {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 150ms ease-in-out;
+}
+#end-game.active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+#end-game .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: -1;
+    opacity: .7;
+}
+
+#end-game .text {
+    background: white;
+    width: fit-content;
+    padding: 4rem 8rem;
+    text-align: center;
+    z-index: 2;   
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: .75rem;
+}
+
+#end-game .text button {
+    padding: .75rem 2rem;
+    margin-top: 1rem;
+    background: white;
+    border: 0;
+    outline: 1px black solid;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: .85rem;
+    transition: 100ms ease-in-out;
+}
+
+#end-game .text button:hover {
+    background: #000;
+    color: white;
+    outline: 1px white solid;
+}
+
+#fight-wrapper {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    /* display: none; */
+    /* display: block; */
+    transition: opacity 150ms ease-in-out;
+}
+#fight-wrapper.active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+#fight-wrapper .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: -1;
+    opacity: .7;
+}
+
+#fight-wrapper .text {
+    background: white;
+    width: fit-content;
+    padding: 4rem 8rem;
+    text-align: center;
+    z-index: 2;   
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: .75rem;
+}
+
+#take-item-wrapper {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    transform: translateY(40px);
+    opacity: 0; 
+    visibility: hidden;
+    /* display: none; */
+    /* display: block; */
+    transition: opacity 150ms ease-in-out, transform 300ms ease-in-out, visibility 500ms;
+}
+#take-item-wrapper.active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    transform: translateY(0px);
+}
+
+#take-item-wrapper .text {
+    background: white;
+    width: fit-content;
+    padding: 2rem 4rem;
+    text-align: center;
+    z-index: 2;   
+    position: relative;
+    left: 100%;
+    top: 100%;
+    transform: translate(-110%, -125%);
+    border-radius: .75rem;
+    border: 1px solid black;
+    transition: opacity 150ms ease-in-out, transform 300ms ease-in-out, visibility 0s;
+}
+
+#take-item-wrapper .text h1 {
+    font-size: 1rem;
+}
+
+
+.wrapper {
+    height: 100vh;
+}
+
+.log-wrapper {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#game-name {
+    text-align: center;
+    font-size: 1.98rem;
+}
+
+.log-wrapper .player-stats {
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.log-wrapper .player-stats .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.log-wrapper .player-stats .stat:not(:last-child) {
+    margin-bottom: .75rem;
+}
+
+.log-wrapper .player-stats .stat .stat-title {
+    margin-bottom: .25rem;
+}
+
+.log-wrapper .log-box {
+    margin-top: 2.5rem;
+    width: 100%;
+    /* height: 75%; */
+    flex: 1;
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    overflow-y: scroll;
+    /* border: .25rem solid black; */
+    
+    
+}
+
+.log-wrapper .log-box h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.log-text {
+    padding: 0.25rem .5rem;
+}
+
+.log-text#last {
+    margin-top: 1rem;
+    background: yellow;
+    font-weight: 700;
+}
+
+.game-wrapper {
+    padding: .25rem;
+    width: 70%;
+    background: url("./assets/gameBoardBG.jpeg");
+    display: grid;
+    gap: .15rem;
+    grid-template-columns: repeat(25, 1fr);
+}
+
+.game-wrapper .square {
+    /* border: 1px solid black; */
+    /* width: 25px; */
+    /* height: 25px; */
+    background: rgba(255, 255, 255, .1);
+    border: .25px solid rgba(255, 255, 255, .35);
+    position: relative;
+}
+
+.game-wrapper .square#square-2424{
+    position: relative;
+}
+
+.game-wrapper .square#square-2424::after {
+    content: "🏆";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.game-wrapper .square.active {
+    position: relative;
+    background: rgba(255, 255, 255, .5);
+}
+
+.game-wrapper .square.active::after {
+    content: "⚔";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: black;
+}
+
+.game-wrapper .square.monster::after, .game-wrapper .square.item::after {
+    /* content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    color: white; */
+}
+
+.game-wrapper .square.monster.killed::after {
+    content: "👹";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    color: white;
+}
+
+.game-wrapper .square.item.taken::after {
+    content: "💊";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    color: white;
+}
